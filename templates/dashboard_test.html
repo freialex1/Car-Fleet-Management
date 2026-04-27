@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="hu">
 
-<!-- Head -->
+<!-- Fejrész -->
 
 <head>
 
 
-    <!-- Include necessary Chart.js library -->
+    <!-- Szükséges Chart.js könyvtár betöltése -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Page Meta Tags-->
+    <!-- Oldal meta címkék -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,13 +16,13 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
 
-    <!-- Custom Google Fonts-->
+    <!-- Egyedi Google betűtípusok -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@300;400;700&display=auto"
         rel="stylesheet">
 
-    <!-- Favicon -->
+    <!-- Webhely ikon -->
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ url_for('static', filename='images/favicon/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32"
@@ -35,18 +35,18 @@
     <meta name="theme-color" content="#ffffff">
 
 
-    <!-- Vendor CSS -->
+    <!-- Külső CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/libs.bundle.css') }}" />
 
-    <!-- Main CSS -->
+    <!-- Fő CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.bundle.css') }}" />
 
 
-    <!-- Fix for custom scrollbar if JS is disabled-->
+    <!-- Javítás az egyedi görgetősávhoz, ha a JS ki van kapcsolva -->
     <noscript>
         <style>
             /**
-          * Reinstate scrolling for non-JS clients
+          * Görgetés visszaállítása JS nélküli kliensekhez
           */
             .simplebar-content-wrapper {
                 overflow: auto;
@@ -54,8 +54,8 @@
         </style>
     </noscript>
 
-    <!-- Page Title -->
-    <title>Reservations</title>
+    <!-- Oldalcím -->
+    <title>Foglalások</title>
 
 
 
@@ -92,14 +92,14 @@
 
 <body class="">
 
-    <!-- Navbar -->
-    <!-- Navbar -->
+    <!-- Navigációs sáv -->
+    <!-- Navigációs sáv -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white flex-column border-0  ">
         <div class="container-fluid">
             <div class="w-100">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-                    <!-- Logo-->
+                    <!-- Logó -->
                     <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="/cars">
                         <div class="d-flex align-items-center">
                             <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26">
@@ -109,54 +109,54 @@
                             </svg>
                         </div>
                     </a>
-                    <!-- / Logo-->
+                    <!-- / Logó -->
 
-                    <!-- Navbar Icons-->
+                    <!-- Navigációs ikonok -->
                     <ul class="list-unstyled mb-0 d-flex align-items-center order-1 order-lg-2 nav-sidelinks">
 
 
-                        <!-- Navbar Search-->
+                        <!-- Navigációs keresés -->
                         <li class="d-none d-sm-block">
-                            <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Logout</a>
+                            <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Kijelentkezés</a>
 
 
 
                         </li>
-                        <!-- /Navbar Search-->
+                        <!-- /Navigációs keresés -->
 
-                        <!-- Navbar Login-->
+                        <!-- Navigációs bejelentkezés -->
                         <li class="ms-1 d-none d-lg-inline-block">
                             <a class="nav-link text-body" href="/dashboardTest">
                                 Dashboard
                             </a>
                         </li>
-                        <!-- /Navbar Login-->
+                        <!-- /Navigációs bejelentkezés -->
 
 
                     </ul>
-                    <!-- Navbar Icons-->
+                    <!-- Navigációs ikonok -->
 
-                    <!-- Main Navigation-->
+                    <!-- Fő navigáció -->
                     <div class="flex-shrink-0 collapse navbar-collapse navbar-collapse-light w-auto flex-grow-1 order-2 order-lg-1"
                         id="navbarNavDropdown">
 
-                        <!-- Menu-->
+                        <!-- Menü -->
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                             <li class="nav-item dropdown">
                                 <a href="/clients" class="nav-link dropdown-toggle" role="button">
-                                    Gestion Clients
+                                    Ügyfelek kezelése
                                 </a>
 
                             </li>
                             <li class=" nav-item">
                                 <a class="nav-link" href="/gestion_reservations" role="button">
-                                    Gestion Réservations
+                                    Foglalások kezelése
                                 </a>
                             </li>
                             <li class=" nav-item">
                                 <a class="nav-link" href="/manage_cars" role="button">
-                                    Gestion voitures
+                                    Autók kezelése
                                 </a>
                             </li>
 
@@ -165,11 +165,11 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Gestion Users
+                                    Felhasználók kezelése
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/admin">Admin</a></li>
-                                    <li><a class="dropdown-item" href="/manager">Manager</a></li>
+                                    <li><a class="dropdown-item" href="/admin">Adminisztrátor</a></li>
+                                    <li><a class="dropdown-item" href="/manager">Menedzser</a></li>
 
                                 </ul>
                             </li>
@@ -177,41 +177,41 @@
 
 
 
-                        </ul> <!-- / Menu-->
+                        </ul> <!-- / Menü -->
 
                     </div>
-                    <!-- / Main Navigation-->
+                    <!-- / Fő navigáció -->
 
                 </div>
             </div>
         </div>
     </nav>
-    <!-- / Navbar--> <!-- / Navbar-->
+    <!-- / Navigációs sáv --> <!-- / Navigációs sáv -->
 
-    <!-- Main Section-->
+    <!-- Fő szakasz -->
     <section class="mt-0 ">
-        <!-- Page Content Goes Here -->
+        <!-- Ide kerül az oldal tartalma -->
 
-        <!-- Category Top Banner -->
+        <!-- Kategória felső banner -->
         <div class="py-10 bg-img-cover bg-overlay-dark position-relative overflow-hidden bg-pos-center-center rounded-0"
             style="background-image: url(../static/images/banners/merc.jpg);">
             <div class="container-fluid position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
-                <h1 class="fw-bold display-6 mb-4 text-white">Dashboard</h1>
+                <h1 class="fw-bold display-6 mb-4 text-white">Vezérlőpult</h1>
                 <div class="col-12 col-md-6">
                 </div>
             </div>
         </div>
-        <!-- Category Top Banner -->
+        <!-- Kategória felső banner -->
 
         <div class="container-fluid" data-aos="fade-in">
-            <!-- Category Toolbar-->
+            <!-- Kategória eszköztár -->
             <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
                 <div>
-                    <h1 class="fw-bold fs-3 mb-2">Dashboard</h1>
+                    <h1 class="fw-bold fs-3 mb-2">Vezérlőpult</h1>
                 </div>
-            </div> <!-- /Category Toolbar-->
+            </div> <!-- /Kategória eszköztár -->
 
-            <!-- Products-->
+            <!-- Termékek -->
             <div class="row g-4">
 
 
@@ -220,7 +220,7 @@
                         <div class="col-lg-12">
                             <div class="card shadow">
                                 <div class="card-header bg-info d-flex justify-content-between align-items-center">
-                                    <h3 class="text-light">Reservation Par Statut</h3>
+                                    <h3 class="text-light">Foglalások állapot szerint</h3>
                                 </div>
                                 <div class="card-body" id="show_all_employees">
                                     <div style="width: 900px;">
@@ -241,7 +241,7 @@
                         <div class="col-lg-12">
                             <div class="card shadow">
                                 <div class="card-header bg-info d-flex justify-content-between align-items-center">
-                                    <h3 class="text-light">Client par Adresse</h3>
+                                    <h3 class="text-light">Ügyfelek cím szerint</h3>
                                 </div>
                                 <div class="card-body" id="show_all_employees">
                                     <div style="width: 900px;">
@@ -256,32 +256,32 @@
 
 
             </div>
-            <!-- / Products-->
+            <!-- / Termékek -->
 
         </div>
 
-        <!-- /Page Content -->
+        <!-- /Oldaltartalom -->
     </section>
-    <!-- / Main Section-->
+    <!-- / Fő szakasz -->
 
-    <!-- Footer -->
+    <!-- Lábléc -->
     <footer class="border-top py-5 mt-4  ">
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
                 <div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end flex-column flex-lg-row">
-                    <p class="small m-0 text-center text-lg-start">&copy; 2021 OldSkool All Rights Reserved. Template by
+                    <p class="small m-0 text-center text-lg-start">&copy; 2021 OldSkool. Minden jog fenntartva. Sablon:
                         <a href="https://www.pixelrocket.store">Pixel Rocket</a>
                     </p>
                 </div>
             </div>
         </div>
-    </footer> <!-- / Footer-->
+    </footer> <!-- / Lábléc -->
 
-    <!-- Offcanvas Imports-->
+    <!-- Offcanvas importok -->
 
-    <!-- Theme JS -->
+    <!-- Téma JS -->
     <script src=" {{ url_for('static', filename='js/vendor.bundle.js') }}"></script>
     <script src=" {{ url_for('static', filename='js/theme.bundle.js') }}"></script>
 
@@ -289,7 +289,7 @@
 
 
     <!-- <script>
-        const labels = ['accepter', 'refuser', 'en_attente', 'terminer'];
+        const labels = ['elfogadva', 'elutasítva', 'függőben', 'befejezve'];
         const data = {
           labels: labels,
           datasets: [{
@@ -335,7 +335,7 @@
     </script> -->
 
     <script>
-        // Get the data passed from Flask
+        // A Flaskből átadott adatok lekérése
         const labels = JSON.parse('{{ labels|safe }}');
         const data = {
             labels: labels,
@@ -391,7 +391,7 @@
 
 
 
-        // Get the data passed from Flask
+        // A Flaskből átadott adatok lekérése
         const labels1 = JSON.parse('{{ labels1|safe }}');
         const data1 = {
             labels: labels1,

@@ -51,7 +51,7 @@
     </noscript>
 
     <!-- Page Title -->
-    <title>Reservations</title>
+    <title>Foglalások</title>
 
 
 
@@ -112,7 +112,7 @@
 
                         <!-- Navbar Search-->
                         <li class="d-none d-sm-block">
-                            <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Logout</a>
+                            <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Kijelentkezés</a>
 
 
 
@@ -122,7 +122,7 @@
                         <!-- Navbar Login-->
                         <li class="ms-1 d-none d-lg-inline-block">
                             <a class="nav-link text-body" href="/dashboardTest">
-                                Dashboard
+                                Vezérlőpult
                             </a>
                         </li>
                         <!-- /Navbar Login-->
@@ -140,18 +140,18 @@
 
                             <li class="nav-item dropdown">
                                 <a href="/clients" class="nav-link dropdown-toggle" role="button">
-                                    Gestion Clients
+                                    Ügyfelek kezelése
                                 </a>
 
                             </li>
                             <li class=" nav-item">
                                 <a class="nav-link" href="/gestion_reservations" role="button">
-                                    Gestion Réservations
+                                    Foglalások kezelése
                                 </a>
                             </li>
                             <li class=" nav-item">
                                 <a class="nav-link" href="/manage_cars" role="button">
-                                    Gestion voitures
+                                    Autók kezelése
                                 </a>
                             </li>
 
@@ -160,11 +160,11 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Gestion Users
+                                    Felhasználók kezelése
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/admin">Admin</a></li>
-                                    <li><a class="dropdown-item" href="/manager">Manager</a></li>
+                                    <li><a class="dropdown-item" href="/admin">Adminisztrátor</a></li>
+                                    <li><a class="dropdown-item" href="/manager">Menedzser</a></li>
 
                                 </ul>
                             </li>
@@ -191,7 +191,7 @@
         <div class="py-10 bg-img-cover bg-overlay-dark position-relative overflow-hidden bg-pos-center-center rounded-0"
             style="background-image: url(../static/images/banners/merc.jpg);">
             <div class="container-fluid position-relative z-index-20" data-aos="fade-right" data-aos-delay="300">
-                <h1 class="fw-bold display-6 mb-4 text-white">Gestion Reservations</h1>
+                <h1 class="fw-bold display-6 mb-4 text-white">Foglalások kezelése</h1>
                 <div class="col-12 col-md-6">
                 </div>
             </div>
@@ -202,7 +202,7 @@
             <!-- Category Toolbar-->
             <div class="d-flex justify-content-between items-center pt-5 pb-4 flex-column flex-lg-row">
                 <div>
-                    <h1 class="fw-bold fs-3 mb-2">Gestion Reservations</h1>
+                    <h1 class="fw-bold fs-3 mb-2">Foglalások kezelése</h1>
                 </div>
             </div> <!-- /Category Toolbar-->
 
@@ -214,15 +214,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Reservation ID</th>
-                            <th>Client ID</th>
-                            <th>voiture ID</th>
-                            <th>Date Debut</th>
-                            <th>Date Fin</th>
-                            <th>Prix Reservation</th>
-                            <th>Status</th>
+                            <th>Foglalás azonosító</th>
+                            <th>Ügyfél azonosító</th>
+                            <th>Autó azonosító</th>
+                            <th>Kezdési dátum</th>
+                            <th>Befejezési dátum</th>
+                            <th>Foglalás ára</th>
+                            <th>Állapot</th>
 
-                            <th>Actions</th>
+                            <th>Műveletek</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -239,8 +239,8 @@
                             <td class="actions">
                                 <form action="/gestion_reservations" method="POST">
                                     <input type="hidden" name="reservation_id" value="{{ reservation._id }}">
-                                    <button type="submit" name="action" value="accepter">Accept</button>
-                                    <button type="submit" name="action" value="refuser">Refuse</button>
+                                    <button type="submit" name="action" value="accepter">Elfogadás</button>
+                                    <button type="submit" name="action" value="refuser">Elutasítás</button>
                                 </form>
                             </td>
                         </tr>
@@ -267,7 +267,7 @@
                 <div>
                 </div>
                 <div class="d-flex align-items-center justify-content-end flex-column flex-lg-row">
-                    <p class="small m-0 text-center text-lg-start">&copy; 2021 OldSkool All Rights Reserved. Template by
+                    <p class="small m-0 text-center text-lg-start">&copy; 2021 OldSkool Minden jog fenntartva. Sablon készítője:
                         <a href="https://www.pixelrocket.store">Pixel Rocket</a>
                     </p>
                 </div>

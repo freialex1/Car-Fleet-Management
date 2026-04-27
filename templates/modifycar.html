@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="hu">
 
 <!-- Head -->
 
@@ -38,7 +38,7 @@
   </noscript>
 
   <!-- Page Title -->
-  <title>OldSkool | Bootstrap 5 HTML Template</title>
+  <title>Autó módosítása</title>
 
 </head>
 
@@ -61,28 +61,28 @@
             <input type="hidden" name="carId" value="{{ car._id }}">
           </div>
           <div>
-            <label for="make" class="form-label">Make:</label>
+            <label for="make" class="form-label">Márka:</label>
             <input type="text" name="make" class="form-control" value="{{ car.marque }}">
           </div>
           <div>
-            <label for="model" class="form-label">Model:</label>
+            <label for="model" class="form-label">Modell:</label>
             <input type="text" name="model" class="form-control" value="{{ car.modele }}">
           </div>
           <div>
-            <label for="year" class="form-label">Year:</label>
+            <label for="year" class="form-label">Év:</label>
             <input type="text" name="year" class="form-control" value="{{ car.annee }}">
           </div>
           <div>
-            <label for="price" class="form-label">Price:</label>
+            <label for="price" class="form-label">Ár:</label>
             <input type="text" name="price" class="form-control" value="{{ car.prix }}">
           </div>
           <div>
-            <label for="matricule" class="form-label">Matricule:</label>
+            <label for="matricule" class="form-label">Rendszám:</label>
             <input type="text" name="matricule" class="form-control" value="{{ car.matricule }}">
           </div>
           <!-- Other car fields -->
 
-          <button type="submit" class="btn btn-dark d-block w-100 my-4">Update</button>
+          <button type="submit" class="btn btn-dark d-block w-100 my-4">Mentés</button>
         </form>
       </div>
 

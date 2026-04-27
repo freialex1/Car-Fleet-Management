@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="hu">
 
 <!-- Head -->
 
@@ -74,19 +74,19 @@
                     <ul class="list-unstyled mb-0 d-flex align-items-center order-1 order-lg-2 nav-sidelinks">
 
 
-                        <!-- Navbar Search-->
+                        <!-- Navbar Keresés-->
                         <li class="d-none d-sm-block">
-                            <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Logout</a>
+                            <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Kijelentkezés</a>
 
 
 
                         </li>
-                        <!-- /Navbar Search-->
+                        <!-- /Navbar Keresés-->
 
                         <!-- Navbar Login-->
                         <li class="ms-1 d-none d-lg-inline-block">
                             <a class="nav-link text-body" href="/dashboardTest">
-                                Dashboard
+                                Vezérlőpult
                             </a>
                         </li>
                         <!-- /Navbar Login-->
@@ -104,18 +104,18 @@
 
                             <li class="nav-item dropdown">
                                 <a href="/clients" class="nav-link dropdown-toggle" role="button">
-                                    Gestion Clients
+                                    Ügyfelek kezelése
                                 </a>
 
                             </li>
                             <li class=" nav-item">
                                 <a class="nav-link" href="/gestion_reservations" role="button">
-                                    Gestion Réservations
+                                    Foglalások kezelése
                                 </a>
                             </li>
                             <li class=" nav-item">
                                 <a class="nav-link" href="/manage_cars" role="button">
-                                    Gestion voitures
+                                    Autók kezelése
                                 </a>
                             </li>
 
@@ -124,11 +124,11 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    Gestion Users
+                                    Felhasználók kezelése
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/admin">Admin</a></li>
-                                    <li><a class="dropdown-item" href="/manager">Manager</a></li>
+                                    <li><a class="dropdown-item" href="/admin">Adminisztrátor</a></li>
+                                    <li><a class="dropdown-item" href="/manager">Menedzser</a></li>
 
                                 </ul>
                             </li>
@@ -158,7 +158,7 @@
 
                 <div class="col-12 col-md-6">
                     <p class="text-white mb-0 fs-5">
-                        Découvrez la liberté de voyager avec notre service de location de voitures de premier choix
+                        Fedezd fel az utazás szabadságát prémium autóbérlési szolgáltatásunkkal
 
                     </p>
                 </div>
@@ -172,13 +172,13 @@
                 <div>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Cars</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">All available Cars</li>
+                            <li class="breadcrumb-item"><a href="#">Főoldal</a></li>
+                            <li class="breadcrumb-item"><a href="#">Autók</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Összes elérhető autó</li>
                         </ol>
                     </nav>
-                    <h1 class="fw-bold fs-3 mb-2">All available Cars</h1>
-                    <p class="m-0 text-muted small">Showing 1 - 9 of 121</p>
+                    <h1 class="fw-bold fs-3 mb-2">Összes elérhető autó</h1>
+                    <p class="m-0 text-muted small">1–9 megjelenítve a 121-ből</p>
                 </div>
                 <div class="d-flex justify-content-end align-items-center mt-4 mt-lg-0 flex-column flex-md-row">
 
@@ -201,7 +201,7 @@
                         <div class="card-img position-relative">
                             <div class="card-badges">
                                 <span class="badge badge-card"><span
-                                        class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
+                                        class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Akció</span>
                             </div>
                             <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
                                     class="ri-heart-line"></i></span>
@@ -218,11 +218,11 @@
                             <a class="text-decoration-none link-cover"
                                 href="{{ url_for('location_car', voiture_id=car._id) }}">{{ car.brand }} - {{
                                 car.model }}</a>
-                            <small class="text-muted d-block">Matricule: {{ car.matricule }}</small>
-                            <small class="text-muted d-block">Matricule: {{ car._id }}</small>
-                            <small class="text-muted d-block">Year: {{ car.year }}</small>
-                            <small class="text-muted d-block">Price :{{ car.price }} MAD</small>
-                            <small class="text-muted d-block">Matricule: {{ car.matricule }}</small>
+                            <small class="text-muted d-block">Rendszám: {{ car.matricule }}</small>
+                            <small class="text-muted d-block">Azonosító: {{ car._id }}</small>
+                            <small class="text-muted d-block">Évjárat: {{ car.year }}</small>
+                            <small class="text-muted d-block">Ár: {{ car.price }} MAD</small>
+                            <small class="text-muted d-block">Rendszám: {{ car.matricule }}</small>
 
 
                             <br>
@@ -230,15 +230,15 @@
                             <div class="d-flex justify-content-center">
 
                                 <a href="#" class="btn btn-primary rent-btn"
-                                    style="background-color: black; color: white;">Rent Now</a>
+                                    style="background-color: black; color: white;">Bérlés most</a>
                             </div>
                             {% endif %}
                             {% if car.statut == 'accepter' %}
                             <div class="d-flex justify-content-center">
 
                                 <button href="#" class="btn btn-danger "
-                                    style="background-color: black; color: white;">Not
-                                    available</button>
+                                    style="background-color: black; color: white;">Nem
+                                    elérhető</button>
                             </div>
                             {% endif %}
                         </div>
@@ -258,12 +258,12 @@
 
         <!-- Pagination-->
         <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-            <small class="text-muted">Showing 9 of 121 products</small>
+            <small class="text-muted">9 termék megjelenítve a 121-ből</small>
             <div class="progress f-h-1 mt-3">
                 <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25"
                     aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load More</a>
+            <a href="#" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Továbbiak betöltése</a>
         </div> <!-- / Pagination-->
         </div>
 
@@ -314,7 +314,7 @@
     <!-- Filters Offcanvas-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasFiltersLabel">
         <div class="offcanvas-header pb-0 d-flex align-items-center">
-            <h5 class="offcanvas-title" id="offcanvasFiltersLabel">Category Filters</h5>
+            <h5 class="offcanvas-title" id="offcanvasFiltersLabel">Kategóriaszűrők</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -323,12 +323,12 @@
                 <!-- Filters-->
                 <div>
 
-                    <!-- Price Filter -->
+                    <!-- Ár Filter -->
                     <div class="py-4 widget-filter widget-filter-price border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
                             data-bs-toggle="collapse" href="#filter-modal-price" role="button" aria-expanded="true"
                             aria-controls="filter-modal-price">
-                            Price
+                            Ár
                         </a>
                         <div id="filter-modal-price" class="collapse show">
                             <div class="filter-price mt-6"></div>
@@ -346,19 +346,19 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Price Filter -->
+                    <!-- / Ár Filter -->
 
-                    <!-- Brands Filter -->
+                    <!-- Márkák Filter -->
                     <div class="py-4 widget-filter border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
                             data-bs-toggle="collapse" href="#filter-modal-brands" role="button" aria-expanded="true"
                             aria-controls="filter-modal-brands">
-                            Brands
+                            Márkák
                         </a>
                         <div id="filter-modal-brands" class="collapse show">
                             <div class="input-group my-3 py-1">
-                                <input type="text" class="form-control py-2 filter-search rounded" placeholder="Search"
-                                    aria-label="Search">
+                                <input type="text" class="form-control py-2 filter-search rounded" placeholder="Keresés"
+                                    aria-label="Keresés">
                                 <span
                                     class="input-group-text bg-transparent p-2 position-absolute top-10 end-0 border-0 z-index-20"><i
                                         class="ri-search-2-line text-muted"></i></span>
@@ -439,14 +439,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Brands Filter -->
+                    <!-- / Márkák Filter -->
 
-                    <!-- Sizes Filter -->
+                    <!-- Méretek Filter -->
                     <div class="py-4 widget-filter border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
                             data-bs-toggle="collapse" href="#filter-modal-sizes" role="button" aria-expanded="true"
                             aria-controls="filter-modal-sizes">
-                            Sizes
+                            Méretek
                         </a>
                         <div id="filter-modal-sizes" class="collapse show">
                             <div class="filter-options mt-3">
@@ -497,14 +497,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Sizes Filter -->
+                    <!-- / Méretek Filter -->
 
-                    <!-- Colour Filter -->
+                    <!-- Szín Filter -->
                     <div class="py-4 widget-filter border-top">
                         <a class="small text-body text-decoration-none text-secondary-hover transition-all transition-all fs-6 fw-bolder d-block collapse-icon-chevron"
                             data-bs-toggle="collapse" href="#filter-modal-colour" role="button" aria-expanded="true"
                             aria-controls="filter-modal-colour">
-                            Colour
+                            Szín
                         </a>
                         <div id="filter-modal-colour" class="collapse show">
                             <div class="filter-options mt-3">
@@ -546,14 +546,14 @@
                             </div>
                         </div>
                     </div>
-                    <!-- / Colour Filter -->
+                    <!-- / Szín Filter -->
                 </div>
                 <!-- / Filters-->
 
                 <!-- Filter Button-->
                 <div class="border-top pt-3">
                     <a href="#" class="btn btn-dark mt-2 d-block hover-lift-sm hover-boxshadow"
-                        data-bs-dismiss="offcanvas" aria-label="Close">Done</a>
+                        data-bs-dismiss="offcanvas" aria-label="Close">Kész</a>
                 </div>
                 <!-- /Filter Button-->
             </div>

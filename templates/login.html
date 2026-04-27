@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="hu">
 
 
 
@@ -40,7 +40,7 @@
             }
         </style>
     </noscript>
-    <title>OldSkool | Bootstrap 5 HTML Template</title>
+    <title>Bejelentkezés</title>
 
 </head>
 
@@ -71,9 +71,9 @@
 
                         <!-- /Navbar Search-->
 
-                        <!-- Navbar Login-->
+                        <!-- Navbar Bejelentkezés-->
 
-                        <!-- /Navbar Login-->
+                        <!-- /Navbar Bejelentkezés-->
 
 
                     </ul>
@@ -115,20 +115,20 @@
 
             <form action="{{url_for('auth')}}" method="post">
                 <div class="form-group">
-                    <label class="form-label" for="login-email">Email address</label>
-                    <input type="email" class="form-control" id="login-email" placeholder="name@email.com" name="email">
+                    <label class="form-label" for="login-email">Email cím</label>
+                    <input type="email" class="form-control" id="login-email" placeholder="pelda@email.com" name="email">
                 </div>
                 <div class="form-group">
                     <label for="login-password" class="form-label d-flex justify-content-between align-items-center">
-                        Password
-                        <a href="./forgotten-password.html" class="text-muted small">Forgot your password?</a>
+                        Jelszó
+                        <a href="./forgotten-password.html" class="text-muted small">Elfelejtetted a jelszavad?</a>
                     </label>
-                    <input type="password" class="form-control" id="login-password" placeholder="Enter your password"
+                    <input type="password" class="form-control" id="login-password" placeholder="Add meg a jelszavad"
                         name="password">
                 </div>
-                <button type="submit" class="btn btn-dark d-block w-100 my-4">Login</button>
+                <button type="submit" class="btn btn-dark d-block w-100 my-4">Bejelentkezés</button>
             </form>
-            <p class="d-block text-center text-muted">New customer? <a class="text-muted" href="./register.html">Sign up
+            <p class="d-block text-center text-muted">Új felhasználó? <a class="text-muted" href="./register.html">Sign up
                     for an account</a></p>
         </div>
 

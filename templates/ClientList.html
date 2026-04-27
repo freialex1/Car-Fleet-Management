@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 
 <head>
   <!-- Required meta tags-->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="au theme template">
+  <meta name="description" content="admin sablon">
   <meta name="author" content="Hau Nguyen">
-  <meta name="keywords" content="au theme template">
+  <meta name="keywords" content="admin sablon">
 
   <!-- Title Page-->
-  <title>Liste des clients</title>
+  <title>Ügyfelek listája</title>
 
   <!-- Fontfaces CSS-->
   <link href="/static/DatatableAssets/css/font-face.css" rel="stylesheet" media="all">
@@ -49,7 +49,7 @@
   /* Modal styling */
   .modal {
     display: none;
-    /* Hide the modal by default */
+    /* Modal alapértelmezett elrejtése */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -58,7 +58,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    /* Overlay background */
+    /* Háttérfedés */
   }
 
   .modal-content {
@@ -108,7 +108,7 @@
 
             <!-- Navbar Search-->
             <li class="d-none d-sm-block">
-              <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Logout</a>
+              <a href="/logout" class="nav-link text-body search-trigger cursor-pointer">Kijelentkezés</a>
 
 
 
@@ -118,7 +118,7 @@
             <!-- Navbar Login-->
             <li class="ms-1 d-none d-lg-inline-block">
               <a class="nav-link text-body" href="/dashboardTest">
-                Dashboard
+                Vezérlőpult
               </a>
             </li>
             <!-- /Navbar Login-->
@@ -137,18 +137,18 @@
 
               <li class="nav-item dropdown">
                 <a href="/clients" class="nav-link dropdown-toggle" role="button">
-                  Gestion Clients
+                  Ügyfelek kezelése
                 </a>
 
               </li>
               <li class=" nav-item">
                 <a class="nav-link" href="/gestion_reservations" role="button">
-                  Gestion Réservations
+                  Foglalások kezelése
                 </a>
               </li>
               <li class=" nav-item">
                 <a class="nav-link" href="/manage_cars" role="button">
-                  Gestion voitures
+                  Autók kezelése
                 </a>
               </li>
 
@@ -157,7 +157,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  Gestion Users
+                  Felhasználók kezelése
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/admin">Admin</a></li>
@@ -214,12 +214,12 @@
 
                 <div class="table-data__tool">
                   <div class="table-data__tool-left">
-                    <h3 class="title-5 m-b-35">Liste des clients</h3>
+                    <h3 class="title-5 m-b-35">Ügyfelek listája</h3>
 
                   </div>
                   <div class="table-data__tool-right">
                     <a href="{{ url_for('add_new_client') }}" class="au-btn au-btn-icon au-btn--green au-btn--small">
-                      <i class="zmdi zmdi-plus"></i> Ajouter Un Nouveau Client
+                      <i class="zmdi zmdi-plus"></i> Új ügyfél hozzáadása
                     </a>
 
                   </div>
@@ -229,11 +229,11 @@
                     <thead>
                       <tr>
                         <th>CIN</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
+                        <th>Vezetéknév</th>
+                        <th>Keresztnév</th>
                         <th>Email</th>
-                        <th>Telephone</th>
-                        <th>Address</th>
+                        <th>Telefonszám</th>
+                        <th>Cím</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -253,14 +253,14 @@
                         <td>
                           <div class="table-data-feature">
                             <button class="item" data-toggle="tooltip" data-placement="top"
-                              title="Reserver pour ce client">
+                              title="Foglalás ehhez az ügyfélhez">
                               <i class="zmdi zmdi-mail-send"></i>
                             </button>
 
 
 
                             <input type="hidden" name="idClient" value="{{ client.id }}">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Modifier"
+                            <button class="item" data-toggle="tooltip" data-placement="top" title="Szerkesztés"
                               onclick="showModal(); fillModalInputs('{{ client.cin }}','{{ client.nom }}', '{{ client.prenom }}', '{{ client.email }}', '{{ client.tel }}', '{{ client.adresse }}')">
                               <i class="zmdi zmdi-edit"></i>
                             </button>
@@ -269,7 +269,7 @@
 
                             <form method="POST" action="/deleteClient">
                               <input type="hidden" name="idClient" value="{{ client.cin }}">
-                              <button class="item" data-toggle="tooltip" data-placement="top" title="Supprimer"
+                              <button class="item" data-toggle="tooltip" data-placement="top" title="Törlés"
                                 type="submit">
                                 <i class="zmdi zmdi-delete"></i>
                               </button>
@@ -298,35 +298,35 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <!-- Form to modify client information -->
+      <!-- Űrlap az ügyfél adatainak módosításához -->
       <form method="POST" action="{{ url_for('modify_client') }}">
         <div class="form-group">
           <label class="form-label" for="register-id">CIN</label>
 
-          <input type="text" name="CIN" class="form-control" id="register-CIN" placeholder="Entrer CIN" readonly>
+          <input type="text" name="CIN" class="form-control" id="register-CIN" placeholder="CIN megadása" readonly>
         </div>
         <div class="form-group">
-          <label class="form-label" for="register-nom">Nom</label>
-          <input type="text" class="form-control" id="register-nom" name="nom" placeholder="Entrer Nom">
+          <label class="form-label" for="register-nom">Vezetéknév</label>
+          <input type="text" class="form-control" id="register-nom" name="nom" placeholder="Entrer Vezetéknév">
         </div>
         <div class="form-group">
-          <label class="form-label" for="register-prenom">Prenom</label>
-          <input type="text" class="form-control" id="register-prenom" name="prenom" placeholder="Enter Prenom">
+          <label class="form-label" for="register-prenom">Keresztnév</label>
+          <input type="text" class="form-control" id="register-prenom" name="prenom" placeholder="Enter Keresztnév">
         </div>
         <div class="form-group">
-          <label class="form-label" for="register-email">Adresse email</label>
-          <input type="email" class="form-control" id="register-email" name="email" placeholder="Entrer un email">
+          <label class="form-label" for="register-email">Email cím</label>
+          <input type="email" class="form-control" id="register-email" name="email" placeholder="Email megadása">
         </div>
         <div class="form-group">
-          <label class="form-label" for="register-telephone">Telephone</label>
+          <label class="form-label" for="register-telephone">Telefonszám</label>
           <input type="text" class="form-control" id="register-telephone" name="telephone"
-            placeholder="Entrer numero telephone">
+            placeholder="Telefonszám megadása">
         </div>
         <div class="form-group">
-          <label class="form-label" for="register-adresse">Adresse</label>
-          <input type="text" class="form-control" id="register-adresse" name="adresse" placeholder="Entrer adresse">
+          <label class="form-label" for="register-adresse">Cím</label>
+          <input type="text" class="form-control" id="register-adresse" name="adresse" placeholder="Cím megadása">
         </div>
-        <button type="submit" class="btn btn-dark d-block w-100 my-4">Modifier Client</button>
+        <button type="submit" class="btn btn-dark d-block w-100 my-4">Ügyfél módosítása</button>
       </form>
     </div>
   </div>
@@ -376,22 +376,22 @@
       modal.style.display = "none";
     }
 
-    // Wait for the DOM to be fully loaded
+    // Várakozás a DOM teljes betöltésére
     document.addEventListener("DOMContentLoaded", function () {
-      // Get the update form element
+      // A módosító űrlap elemének lekérése
       var updateForm = document.getElementById("modifyClientForm");
 
-      // Add an event listener to the form's submit event
+      // Eseményfigyelő hozzáadása az űrlap elküldéséhez
       updateForm.addEventListener("submit", function (event) {
-        // Prevent the default form submission
+        // Az alapértelmezett űrlapküldés megakadályozása
         event.preventDefault();
 
-        // Perform any additional processing or validation here
+        // További feldolgozás vagy ellenőrzés itt
 
-        // Close the modal after the form is submitted
+        // Modal bezárása az űrlap elküldése után
         closeModal();
 
-        // Submit the form programmatically
+        // Az űrlap programból történő elküldése
         updateForm.submit();
       });
     });
@@ -400,4 +400,4 @@
 </body>
 
 </html>
-<!-- end document-->
+<!-- dokumentum vége-->
