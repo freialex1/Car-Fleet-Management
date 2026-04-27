@@ -246,8 +246,9 @@ except:
 
 @app.route('/manage_cars')
 def manage_cars():
-    cars = cars_collection.find()
-    return render_template('managecars.html', cars=cars)
+    cars = list(cars_collection.find())
+    car_count = len(cars)
+    return render_template('managecars.html', cars=cars, car_count=car_count)
 
 UPLOAD_FOLDER = 'static/images/cars/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
