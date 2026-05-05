@@ -244,6 +244,62 @@ try:
 except:
     print("ERROR - Cannot connect to db")
 
+def predict_service(car_id):
+    # daily_usage adatok lekérése az adott autóra
+    usages = list(db['daily_usage'].find({"car_id": str(car_id)}))
+
+    if not usages:
+        return {
+            "avg_km_per_day": 0,
+            "total_km": 0,
+            "days_estimate": "N/A",
+            "status": "nincs adat"
+        }
+
+    total_km = 0
+    dates = []
+
+    for u in usages:
+        try:
+            total_km += int(u.get("km_driven", 0))
+        except:
+            pass
+
+        if u.get("date"):
+            dates.append(u.get("date"))
+
+    # napok száma (egyszerűsítve)
+    days_count = len(dates) if len(dates) > 0 else 1
+
+    avg_km_per_day = total_km / days_count
+
+    # ALAP LOGIKA (egyszerű verzió)
+    base_interval = 10000  # olajcsere alap
+
+    # becslés: mennyi nap múlva éri el
+    if avg_km_per_day > 0:
+        days_estimate = int(base_interval / avg_km_per_day)
+    else:
+        days_estimate = "N/A"
+
+    # státusz
+    if isinstance(days_estimate, int):
+        if days_estimate > 30:
+            status = "rendben"
+        elif 10 < days_estimate <= 30:
+            status = "hamarosan"
+        else:
+            status = "sürgős"
+    else:
+        status = "ismeretlen"
+
+    return {
+        "avg_km_per_day": round(avg_km_per_day, 1),
+        "total_km": total_km,
+        "days_estimate": days_estimate,
+        "status": status
+    }
+
 @app.route('/manage_cars')
 def manage_cars():
     cars = list(cars_collection.find())
@@ -361,6 +417,11 @@ def add_maintenance():
 @app.route('/maintenance')
 def maintenance_list():
     maintenances = list(db['maintenance'].find())
+
+    for m in maintenances:
+        prediction = predict_service(m["car_id"])
+        m["prediction"] = prediction
+
     return render_template('maintenance.html', maintenances=maintenances)
     
     

@@ -16,6 +16,9 @@
             <th>KM</th>
             <th>Partner</th>
             <th>Költség</th>
+			<th>Átlag km/nap</th>
+			<th>Napok (becslés)</th>
+			<th>Státusz</th>
         </tr>
 
         {% for m in maintenances %}
@@ -26,6 +29,9 @@
             <td>{{ m.current_km }}</td>
             <td>{{ m.partner_name }}</td>
             <td>{{ m.cost }}</td>
+			<td>{{ m.prediction.avg_km_per_day }}</td>
+			<td>{{ m.prediction.days_estimate }}</td>
+			<td>{{ m.prediction.status }}</td>
         </tr>
         {% endfor %}
 
