@@ -327,6 +327,75 @@ def delete_car():
         print(f"Error deleting document: {e}")
 
 
+@app.route('/add_maintenance', methods=['GET', 'POST'])
+def add_maintenance():
+    if request.method == 'POST':
+        car_id = request.form['car_id']
+        type_ = request.form['type']
+        current_km = request.form['current_km']
+        partner_name = request.form['partner_name']
+        cost = request.form['cost']
+        description = request.form['description']
+
+        car = cars_collection.find_one({'_id': ObjectId(car_id)})
+        matricule = car.get('matricule') if car else ''
+
+        maintenance_data = {
+            "car_id": car_id,
+            "matricule": matricule,
+            "type": type_,
+            "current_km": current_km,
+            "partner_name": partner_name,
+            "cost": cost,
+            "description": description
+        }
+
+        db['maintenance'].insert_one(maintenance_data)
+
+        return redirect('/maintenance')
+
+    cars = list(cars_collection.find())
+    return render_template('addmaintenance.html', cars=cars)
+
+
+@app.route('/maintenance')
+def maintenance_list():
+    maintenances = list(db['maintenance'].find())
+    return render_template('maintenance.html', maintenances=maintenances)
+    
+    
+@app.route('/add_daily_usage', methods=['GET', 'POST'])
+def add_daily_usage():
+    if request.method == 'POST':
+        car_id = request.form['car_id']
+        date = request.form['date']
+        km_driven = request.form['km_driven']
+        usage_type = request.form['usage_type']
+        description = request.form['description']
+
+        car = cars_collection.find_one({'_id': ObjectId(car_id)})
+        matricule = car.get('matricule') if car else ''
+
+        daily_usage_data = {
+            "car_id": car_id,
+            "matricule": matricule,
+            "date": date,
+            "km_driven": km_driven,
+            "usage_type": usage_type,
+            "description": description
+        }
+
+        db['daily_usage'].insert_one(daily_usage_data)
+
+        return redirect('/manage_cars')
+
+    cars = list(cars_collection.find())
+    return render_template('adddailyusage.html', cars=cars)
+    
+@app.route('/daily_usage')
+def daily_usage_list():
+    daily_usages = list(db['daily_usage'].find())
+    return render_template('dailyusage.html', daily_usages=daily_usages)
 
 ############################ AHMED ##################################
 

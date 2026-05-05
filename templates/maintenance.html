@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Karbantartások</title>
+</head>
+<body>
+
+    <h1>Karbantartások listája</h1>
+
+    <table border="1">
+        <tr>
+            <th>Autó</th>
+            <th>Rendszám</th>
+            <th>Típus</th>
+            <th>KM</th>
+            <th>Partner</th>
+            <th>Költség</th>
+        </tr>
+
+        {% for m in maintenances %}
+        <tr>
+            <td>{{ m.car_id }}</td>
+            <td>{{ m.matricule }}</td>
+            <td>{{ m.type }}</td>
+            <td>{{ m.current_km }}</td>
+            <td>{{ m.partner_name }}</td>
+            <td>{{ m.cost }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

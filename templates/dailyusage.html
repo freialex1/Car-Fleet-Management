@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Napi futások</title>
+</head>
+<body>
+    <h1>Napi futások listája</h1>
+
+    <table border="1">
+        <tr>
+            <th>Autó</th>
+            <th>Rendszám</th>
+            <th>Dátum</th>
+            <th>Megtett km</th>
+            <th>Használat típusa</th>
+            <th>Megjegyzés</th>
+        </tr>
+
+        {% for d in daily_usages %}
+        <tr>
+            <td>{{ d.car_id }}</td>
+            <td>{{ d.matricule }}</td>
+            <td>{{ d.date }}</td>
+            <td>{{ d.km_driven }}</td>
+            <td>{{ d.usage_type }}</td>
+            <td>{{ d.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/add_daily_usage">Új napi futás rögzítése</a>
+</body>
+</html>

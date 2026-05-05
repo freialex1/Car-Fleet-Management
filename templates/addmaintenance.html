@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Karbantartás hozzáadása</title>
+</head>
+<body>
+    <h1>Karbantartás hozzáadása</h1>
+
+    <form method="POST" action="/add_maintenance">
+        <label>Autó:</label>
+        <select name="car_id">
+            {% for car in cars %}
+                <option value="{{ car._id }}">
+                    {{ car.marque }} {{ car.modele }} - {{ car.matricule }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <label>Karbantartás típusa:</label>
+        <input type="text" name="type">
+
+        <br><br>
+
+        <label>Aktuális km:</label>
+        <input type="number" name="current_km">
+
+        <br><br>
+
+        <label>Partner neve:</label>
+        <input type="text" name="partner_name">
+
+        <br><br>
+
+        <label>Költség:</label>
+        <input type="number" name="cost">
+
+        <br><br>
+
+        <label>Megjegyzés:</label>
+        <textarea name="description"></textarea>
+
+        <br><br>
+
+        <button type="submit">Mentés</button>
+    </form>
+</body>
+</html>

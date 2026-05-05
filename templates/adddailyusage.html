@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Napi futás rögzítése</title>
+</head>
+<body>
+    <h1>Napi futás rögzítése</h1>
+
+    <form method="POST" action="/add_daily_usage">
+        <label>Autó:</label>
+        <select name="car_id">
+            {% for car in cars %}
+                <option value="{{ car._id }}">
+                    {{ car.marque }} {{ car.modele }} - {{ car.matricule }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <label>Dátum:</label>
+        <input type="date" name="date">
+
+        <br><br>
+
+        <label>Megtett km:</label>
+        <input type="number" name="km_driven">
+
+        <br><br>
+
+        <label>Használat típusa:</label>
+        <select name="usage_type">
+            <option value="city">Városi</option>
+            <option value="mixed">Vegyes</option>
+            <option value="highway">Autópálya</option>
+            <option value="intensive">Intenzív</option>
+        </select>
+
+        <br><br>
+
+        <label>Megjegyzés:</label>
+        <textarea name="description"></textarea>
+
+        <br><br>
+
+        <button type="submit">Mentés</button>
+    </form>
+</body>
+</html>
