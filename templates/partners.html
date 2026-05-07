@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Partnerek</title>
+</head>
+<body>
+    <h1>Partnerek listája</h1>
+
+    <a href="/add_partner">Új partner hozzáadása</a>
+
+    <br><br>
+
+    <table border="1">
+        <tr>
+            <th>Név</th>
+            <th>Típus</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Cím</th>
+            <th>Kapcsolattartó</th>
+            <th>Megjegyzés</th>
+            <th>Művelet</th>
+        </tr>
+
+        {% for partner in partners %}
+        <tr>
+            <td>{{ partner.name }}</td>
+            <td>{{ partner.type }}</td>
+            <td>{{ partner.phone }}</td>
+            <td>{{ partner.email }}</td>
+            <td>{{ partner.address }}</td>
+            <td>{{ partner.contact_person }}</td>
+            <td>{{ partner.note }}</td>
+            <td>
+                <form method="POST" action="/delete_partner">
+                    <input type="hidden" name="partner_id" value="{{ partner._id }}">
+                    <button type="submit">Törlés</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

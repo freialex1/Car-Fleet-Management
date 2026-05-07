@@ -20,7 +20,10 @@
         <br><br>
 
         <label>Karbantartás típusa:</label>
-        <input type="text" name="type">
+        <select name="type">
+			<option value="olajcsere">Olajcsere</option>
+			<option value="nagyszerviz">Nagyszerviz</option>
+		</select>
 
         <br><br>
 
@@ -32,8 +35,16 @@
 		<label>Karbantartás dátuma:</label>
 		<input type="date" name="date">
 
-        <label>Partner neve:</label>
-        <input type="text" name="partner_name">
+        <label>Szervizpartner:</label>
+		<select name="partner_id">
+			{% for partner in partners %}
+				{% if partner.type == "szerviz" %}
+					<option value="{{ partner._id }}">
+						{{ partner.name }}
+					</option>
+				{% endif %}
+			{% endfor %}
+		</select>
 
         <br><br>
 

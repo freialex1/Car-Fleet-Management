@@ -432,12 +432,22 @@ def add_maintenance():
         car_id = request.form['car_id']
         type_ = request.form['type']
         current_km = request.form['current_km']
-        partner_name = request.form['partner_name']
         cost = request.form['cost']
         description = request.form['description']
         date = request.form['date']
 
-        car = cars_collection.find_one({'_id': ObjectId(car_id)})
+        partner_id = request.form['partner_id']
+
+        partner = db['partners'].find_one({
+            '_id': ObjectId(partner_id)
+        })
+
+        partner_name = partner.get('name') if partner else ''
+
+        car = cars_collection.find_one({
+            '_id': ObjectId(car_id)
+        })
+
         matricule = car.get('matricule') if car else ''
 
         maintenance_data = {
@@ -445,6 +455,7 @@ def add_maintenance():
             "matricule": matricule,
             "type": type_,
             "current_km": current_km,
+            "partner_id": partner_id,
             "partner_name": partner_name,
             "cost": cost,
             "description": description,
@@ -456,7 +467,13 @@ def add_maintenance():
         return redirect('/maintenance')
 
     cars = list(cars_collection.find())
-    return render_template('addmaintenance.html', cars=cars)
+    partners = list(db['partners'].find())
+
+    return render_template(
+        'addmaintenance.html',
+        cars=cars,
+        partners=partners
+    )
 
 
 @app.route('/maintenance')
@@ -539,6 +556,39 @@ def car_status():
             })
 
     return render_template('carstatus.html', data=result, alerts=alerts)
+    
+    
+@app.route('/add_partner', methods=['GET', 'POST'])
+def add_partner():
+    if request.method == 'POST':
+        partner_data = {
+            "name": request.form['name'],
+            "type": request.form['type'],
+            "phone": request.form['phone'],
+            "email": request.form['email'],
+            "address": request.form['address'],
+            "contact_person": request.form['contact_person'],
+            "note": request.form['note']
+        }
+
+        db['partners'].insert_one(partner_data)
+
+        return redirect('/partners')
+
+    return render_template('addpartner.html')
+    
+    
+@app.route('/partners')
+def partners_list():
+    partners = list(db['partners'].find())
+    return render_template('partners.html', partners=partners)
+
+
+@app.route('/delete_partner', methods=['POST'])
+def delete_partner():
+    partner_id = request.form['partner_id']
+    db['partners'].delete_one({'_id': ObjectId(partner_id)})
+    return redirect('/partners')
 
 ############################ AHMED ##################################
 

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Partner hozzáadása</title>
+</head>
+<body>
+    <h1>Partner hozzáadása</h1>
+
+    <form method="POST" action="/add_partner">
+        <label>Partner neve:</label>
+        <input type="text" name="name">
+
+        <br><br>
+
+        <label>Partner típusa:</label>
+        <select name="type">
+            <option value="szerviz">Szervizpartner</option>
+            <option value="ugyfel">Ügyfélcég</option>
+            <option value="beszallito">Beszállító</option>
+        </select>
+
+        <br><br>
+
+        <label>Telefonszám:</label>
+        <input type="text" name="phone">
+
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email">
+
+        <br><br>
+
+        <label>Cím:</label>
+        <input type="text" name="address">
+
+        <br><br>
+
+        <label>Kapcsolattartó:</label>
+        <input type="text" name="contact_person">
+
+        <br><br>
+
+        <label>Megjegyzés:</label>
+        <textarea name="note"></textarea>
+
+        <br><br>
+
+        <button type="submit">Mentés</button>
+    </form>
+</body>
+</html>
