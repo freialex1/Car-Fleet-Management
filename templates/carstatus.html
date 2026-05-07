@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <title>Autók állapota</title>
+</head>
+<body>
+
+<h1>Autók karbantartási állapota</h1>
+
+<h2>Figyelmeztetések</h2>
+
+{% if alerts %}
+<table border="1">
+    <tr>
+        <th>Autó</th>
+        <th>Rendszám</th>
+        <th>Típus</th>
+        <th>Státusz</th>
+    </tr>
+
+    {% for alert in alerts %}
+    <tr>
+        <td>{{ alert.car.marque }} {{ alert.car.modele }}</td>
+        <td>{{ alert.car.matricule }}</td>
+        <td>{{ alert.type }}</td>
+        <td>{{ alert.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nincs közelgő szerviz 👍</p>
+{% endif %}
+
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>Autó</th>
+        <th>Rendszám</th>
+        <th>Átlag km/nap</th>
+
+        <th>Olajcsere intervallum</th>
+        <th>Olajcsere hátralévő km</th>
+        <th>Olajcsere becslés</th>
+        <th>Olajcsere státusz</th>
+
+        <th>Nagyszerviz intervallum</th>
+        <th>Nagyszerviz hátralévő km</th>
+        <th>Nagyszerviz becslés</th>
+        <th>Nagyszerviz státusz</th>
+    </tr>
+
+    {% for item in data %}
+    <tr>
+        <td>{{ item.car.marque }} {{ item.car.modele }}</td>
+        <td>{{ item.car.matricule }}</td>
+        <td>{{ item.oil_prediction.avg_km_per_day }}</td>
+
+        <td>{{ item.oil_prediction.interval }} km</td>
+        <td>{{ item.oil_prediction.remaining_km }} km</td>
+        <td>{{ item.oil_prediction.days_estimate }} nap</td>
+        <td>{{ item.oil_prediction.status }}</td>
+
+        <td>{{ item.major_prediction.interval }} km</td>
+        <td>{{ item.major_prediction.remaining_km }} km</td>
+        <td>{{ item.major_prediction.days_estimate }} nap</td>
+        <td>{{ item.major_prediction.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

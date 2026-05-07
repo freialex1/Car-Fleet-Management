@@ -244,20 +244,53 @@ try:
 except:
     print("ERROR - Cannot connect to db")
 
-def predict_service(car_id):
-    # daily_usage adatok lekérése az adott autóra
-    usages = list(db['daily_usage'].find({"car_id": str(car_id)}))
+def predict_service(car_id, service_type="oil"):
+    car_id_str = str(car_id)
+
+    if service_type == "major":
+        service_names = ["nagyszerviz", "major"]
+        default_interval = 60000
+    else:
+        service_names = ["olajcsere", "oil"]
+        default_interval = 10000
+
+    last_service = db['maintenance'].find_one(
+        {
+            "car_id": car_id_str,
+            "type": {"$in": service_names}
+        },
+        sort=[("_id", -1)]
+    )
+
+    if last_service and last_service.get("date"):
+        usages = list(db['daily_usage'].find({
+            "car_id": car_id_str,
+            "date": {"$gt": last_service.get("date")}
+        }))
+    else:
+        usages = list(db['daily_usage'].find({"car_id": car_id_str}))
 
     if not usages:
         return {
             "avg_km_per_day": 0,
             "total_km": 0,
+            "remaining_km": default_interval,
             "days_estimate": "N/A",
-            "status": "nincs adat"
+            "status": "nincs futásadat",
+            "interval": default_interval
         }
 
     total_km = 0
-    dates = []
+
+    usage_weights = {
+        "city": 0.7,
+        "mixed": 1.0,
+        "highway": 1.2,
+        "intensive": 0.6
+    }
+
+    total_weight = 0
+    count = 0
 
     for u in usages:
         try:
@@ -265,39 +298,49 @@ def predict_service(car_id):
         except:
             pass
 
-        if u.get("date"):
-            dates.append(u.get("date"))
+        usage = u.get("usage_type", "mixed")
+        total_weight += usage_weights.get(usage, 1.0)
+        count += 1
 
-    # napok száma (egyszerűsítve)
-    days_count = len(dates) if len(dates) > 0 else 1
+    avg_km_per_day = total_km / count if count > 0 else 0
+    avg_weight = total_weight / count if count > 0 else 1.0
 
-    avg_km_per_day = total_km / days_count
+    interval = int(default_interval * avg_weight)
+    remaining_km = interval - total_km
 
-    # ALAP LOGIKA (egyszerű verzió)
-    base_interval = 10000  # olajcsere alap
-
-    # becslés: mennyi nap múlva éri el
     if avg_km_per_day > 0:
-        days_estimate = int(base_interval / avg_km_per_day)
+        days_estimate = int(remaining_km / avg_km_per_day)
     else:
         days_estimate = "N/A"
 
-    # státusz
-    if isinstance(days_estimate, int):
-        if days_estimate > 30:
+    if remaining_km <= 0:
+        status = "lejárt"
+    elif service_type == "major":
+        if days_estimate == "N/A":
+            status = "ismeretlen"
+        elif days_estimate > 180:
+            status = "rendben"
+        elif 60 < days_estimate <= 180:
+            status = "hamarosan"
+        else:
+            status = "sürgős"
+    else:
+        if days_estimate == "N/A":
+            status = "ismeretlen"
+        elif days_estimate > 30:
             status = "rendben"
         elif 10 < days_estimate <= 30:
             status = "hamarosan"
         else:
             status = "sürgős"
-    else:
-        status = "ismeretlen"
 
     return {
         "avg_km_per_day": round(avg_km_per_day, 1),
         "total_km": total_km,
+        "remaining_km": remaining_km,
         "days_estimate": days_estimate,
-        "status": status
+        "status": status,
+        "interval": interval
     }
 
 @app.route('/manage_cars')
@@ -392,6 +435,7 @@ def add_maintenance():
         partner_name = request.form['partner_name']
         cost = request.form['cost']
         description = request.form['description']
+        date = request.form['date']
 
         car = cars_collection.find_one({'_id': ObjectId(car_id)})
         matricule = car.get('matricule') if car else ''
@@ -403,7 +447,8 @@ def add_maintenance():
             "current_km": current_km,
             "partner_name": partner_name,
             "cost": cost,
-            "description": description
+            "description": description,
+            "date": date
         }
 
         db['maintenance'].insert_one(maintenance_data)
@@ -457,6 +502,43 @@ def add_daily_usage():
 def daily_usage_list():
     daily_usages = list(db['daily_usage'].find())
     return render_template('dailyusage.html', daily_usages=daily_usages)
+    
+    
+@app.route('/car_status')
+def car_status():
+    cars = list(cars_collection.find())
+
+    result = []
+    alerts = []
+
+    for car in cars:
+        oil_prediction = predict_service(car["_id"], "oil")
+        major_prediction = predict_service(car["_id"], "major")
+
+        item = {
+            "car": car,
+            "oil_prediction": oil_prediction,
+            "major_prediction": major_prediction
+        }
+
+        result.append(item)
+
+        # ⚠️ ALERT LOGIKA
+        if oil_prediction["status"] != "rendben":
+            alerts.append({
+                "car": car,
+                "type": "Olajcsere",
+                "status": oil_prediction["status"]
+            })
+
+        if major_prediction["status"] != "rendben":
+            alerts.append({
+                "car": car,
+                "type": "Nagyszerviz",
+                "status": major_prediction["status"]
+            })
+
+    return render_template('carstatus.html', data=result, alerts=alerts)
 
 ############################ AHMED ##################################
 
