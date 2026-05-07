@@ -394,9 +394,22 @@ def update_car():
     year = int(request.form['year'])
     price = int(request.form['price'])
     matricule = request.form['matricule']
+    partner_id = request.form.get('partner_id')
+    partner = db['partners'].find_one({'_id': ObjectId(partner_id)}) if partner_id else None
+    partner_name = partner.get('name') if partner else ''
 
     filter_criteria = {'_id': ObjectId(car_id)}
-    update_data = {'$set': {'marque': make, 'modele': model, 'annee': year, 'prix': price, 'matricule': matricule}}
+    update_data = {
+    '$set': {
+        'marque': make,
+        'modele': model,
+        'annee': year,
+        'prix': price,
+        'matricule': matricule,
+        'partner_id': partner_id,
+        'partner_name': partner_name
+    }
+}
 
     try:
         cars_collection.update_one(filter_criteria, update_data)
@@ -410,8 +423,10 @@ def modify_car():
     car_id = request.args.get('carId')
     car = cars_collection.find_one({'_id': ObjectId(car_id)})
 
+    partners = list(db['partners'].find({"type": "ugyfel"}))
+
     if car:
-        return render_template('modifycar.html', car=car)
+        return render_template('modifycar.html', car=car, partners=partners)
     else:
         return "Car not found"
 

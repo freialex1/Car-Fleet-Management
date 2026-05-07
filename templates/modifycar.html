@@ -81,6 +81,18 @@
             <input type="text" name="matricule" class="form-control" value="{{ car.matricule }}">
           </div>
           <!-- Other car fields -->
+		  
+		  <label>Ügyfél / partner:</label>
+		  <select name="partner_id">
+			<option value="">Nincs hozzárendelve</option>
+
+			{% for partner in partners %}
+				<option value="{{ partner._id }}"
+					{% if car.partner_id == partner._id|string %}selected{% endif %}>
+					{{ partner.name }}
+				</option>
+			{% endfor %}
+		</select>
 
           <button type="submit" class="btn btn-dark d-block w-100 my-4">Mentés</button>
         </form>
